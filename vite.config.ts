@@ -8,7 +8,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@/": fileURLToPath(new URL('src/', import.meta.url))
-    }
+    },
   },
-  base: "fm-age-calculator"
+  base: "/fm-age-calculator"
 })
