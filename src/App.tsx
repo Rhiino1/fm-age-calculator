@@ -1,25 +1,20 @@
 import Footer from "@/layouts/Footer";
 
-// import design from "@/age-calculator-app-main/design/desktop-design.jpg";
 import arrowIcon from "@/assets/images/icon-arrow.svg";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function App() {
   const [date, setDate] = useState({ days: "--", months: "--", years: "--" });
   const [age, setAge] = useState({ days: "--", months: "--", years: "--" });
 
   const [errorMsg, setErrorMsg] = useState({ days: "", months: "", years: "" });
-  // const [errorMsg, setErrorMsg] = useState("");
 
   const { days, months, years } = date;
 
-  // useEffect(() => {
-  //   // console.log(days, months, years);
-  //   console.log(errorMsg);
-  // }, [date]);
-
   const handleClickBtn = () => {
-    if (!handleInvalidDate()) return;
+    let valor = handleInvalidDate();
+    console.log(valor);
+    if (!valor) return;
 
     const currentDate = new Date();
 
@@ -56,11 +51,23 @@ function App() {
   };
 
   const handleInvalidDate = () => {
-    if (errorMsg.days !== "" || errorMsg.months !== "" || errorMsg.years !== "")
-      setErrorMsg((value) => {
+    if (
+      errorMsg.days === "This field is required" ||
+      errorMsg.days === "Must be a valid day" ||
+      errorMsg.months === "This field is required" ||
+      errorMsg.months === "Must be a valid month" ||
+      errorMsg.years === "This field is required" ||
+      errorMsg.years === "Must be a valid year" ||
+      days === "--" ||
+      months === "--" ||
+      years === "--"
+    ) {
+      setErrorMsg(() => {
         return { days: "Invalid date", months: "", years: "" };
       });
-    return false;
+      return false;
+    }
+    return true;
   };
 
   const handleDaysChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -142,7 +149,6 @@ function App() {
   };
   return (
     <>
-      {/* <img src={design} alt="" className="absolute w-auto h-auto opacity-80" /> */}
       <div className="flex flex-col justify-between items-center w-full h-screen bg-[#F0F0F0]">
         <main className="lg:flex-shrink-0 lg:w-[840px] lg:h-[651px] lg:mt-[154px] lg:rounded-br-[199px] lg:gap-[47px] w-[343px] rounded-3xl rounded-br-[99px] bg-white h-[485px] mt-[88px] flex flex-col gap-[63px]">
           <section className="grid lg:w-[656px] lg:gap-8 w-full h-auto grid-cols-3 grid-rows-1 lg:pt-[55px] pt-[43px] lg:px-14 px-6 gap-4">
